@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Convite — Festa Espacial do Henrique</title>
+<style>
+  :root {
+    --bg: #030016;
+    --accent: #7be0ff;
+    --text: #fff;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: radial-gradient(circle at center, #060322, #020011);
+    color: var(--text);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Fundo de estrelas */
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 2s infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.2; }
+    50% { opacity: 1; }
+  }
+
+  /* Planeta Saturno */
+  .saturn {
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    bottom: 20px;
+    left: 20px;
+    background: url('https://cdn.jsdelivr.net/gh/itsrealfarhan/assets/saturn.png') no-repeat center/contain;
+    opacity: 0.15;
+    animation: rotateSaturn 60s linear infinite;
+    z-index: -2;
+  }
+  @keyframes rotateSaturn {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Foguetes animados */
+  .rocket {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background: url('https://cdn.jsdelivr.net/gh/itsrealfarhan/assets/rocket.png') no-repeat center/contain;
+    animation: fly 10s linear infinite;
+    opacity: 0.8;
+    z-index: -1;
+  }
+  @keyframes fly {
+    0% { transform: translateY(100vh) rotate(0deg); left: 10%; }
+    50% { transform: translateY(50vh) rotate(20deg); left: 70%; }
+    100% { transform: translateY(-20vh) rotate(45deg); left: 40%; }
+  }
+
+  header {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 20px var(--accent);
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    margin-top: 10px;
+    color: var(--accent);
+  }
+
+  .message {
+    text-align: center;
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  section {
+    background: rgba(255,255,255,0.06);
+    border-radius: 15px;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255,255,255,0.05);
+  }
+
+  h2 {
+    color: var(--accent);
+  }
+
+  .btn {
+    background: var(--accent);
+    border: none;
+    color: #000;
+    padding: 12px 20px;
+    margin: 8px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+  }
+  .btn:hover { transform: scale(1.05); }
+
+  .map-container {
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 10px;
+    height: 250px;
+  }
+
+  .map-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  #musicToggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent);
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall 3s linear forwards;
+    border-radius: 50%;
+    z-index: 5;
+  }
+
+  @keyframes fall {
+    to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+</style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  <div class="saturn"></div>
+
+  <header>
+    <img src="foto.jpg" alt="Henrique">
+    <h1>Festa Espacial do Henrique 🚀</h1>
+    <p class="message">Prepare-se para uma viagem entre planetas e estrelas! 🌌✨</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>📅 Data e Hora</h2>
+      <p><strong>22 de Novembro de 2025</strong></p>
+      <p><strong>14h00</strong></p>
+    </section>
+
+    <section>
+      <h2>📍 Localização</h2>
+      <p>Nova Veneza</p>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3828.573867606009!2d-49.32906342485836!3d-16.344703684375414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTbCsDIwJzQwLjkiUyA0OcKwMTknMzUuNCJX!5e0!3m2!1spt-BR!2sbr!4v1760727602528!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <a href="https://www.google.com/maps/place/16%C2%B020'40.9%22S+49%C2%B019'35.4%22W" target="_blank" class="map-link">📍 Ver no Google Maps</a>
+    </section>
+
+    <section>
+      <h2>🎉 Confirme sua Presença</h2>
+      <input type="text" id="nome" placeholder="Seu nome" style="padding:10px; border-radius:10px; border:none; width:200px; margin-bottom:10px;">
+      <br>
+      <button class="btn" onclick="confirmarPresenca()">Confirmar no WhatsApp</button>
+      <button class="btn" onclick="adicionarCalendario()">Adicionar ao Calendário</button>
+    </section>
+  </main>
+
+  <audio id="bgMusic" src="music.mp3" autoplay loop></audio>
+  <button id="musicToggle">🔊</button>
+
+  <script>
+    // Estrelas
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 1;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      starsContainer.appendChild(star);
+    }
+
+    // Foguetes
+    for (let i = 0; i < 3; i++) {
+      const rocket = document.createElement('div');
+      rocket.className = 'rocket';
+      rocket.style.animationDelay = `${i * 3}s`;
+      document.body.appendChild(rocket);
+    }
+
+    // Música
+    const music = document.getElementById('bgMusic');
+    const toggleBtn = document.getElementById('musicToggle');
+    let playing = true;
+
+    music.play().catch(() => {
+      console.log("Autoplay bloqueado, aguardando interação...");
+      document.addEventListener('click', () => music.play(), { once: true });
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      if (playing) { music.pause(); toggleBtn.textContent = "🔈"; }
+      else { music.play(); toggleBtn.textContent = "🔊"; }
+      playing = !playing;
+    });
+
+    // Confete contínuo
+    setInterval(() => {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = `hsl(${Math.random()*360},100%,50%)`;
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 5000);
+    }, 200);
+
+    // Confirmar presença
+    function confirmarPresenca() {
+      const nome = document.getElementById('nome').value.trim();
+      if (!nome) { alert("Digite seu nome antes de confirmar!"); return; }
+      const numero = "5562982147568";
+      const mensagem = `Olá! Meu nome é ${nome} e confirmo minha presença na festa do Henrique! 🚀`;
+      window.open(`https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensagem)}`, "_blank");
+    }
+
+    // Adicionar ao calendário
+    function adicionarCalendario() {
+      const title = "Festa Espacial do Henrique 🚀";
+      const location = "Nova Veneza";
+      const details = "Vai ser incrível! 🌌✨";
+      const start = "20251122T170000Z";
+      const end = "20251122T210000Z";
+      const link = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+      window.open(link, "_blank");
+    }
+  </script>
+</body>
+</html>

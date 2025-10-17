@@ -1,104 +1,224 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Convite da Aninha 🎉</title>
-  <style>
-    body {
-      background: linear-gradient(to bottom right, #0f0c29, #302b63, #24243e);
-      font-family: 'Courier New', monospace;
-      color: #f8f8f8;
-      text-align: center;
-      padding: 50px 20px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite — Festa Espacial do Henrique</title>
+<style>
+/* ====================== FONTES ====================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Cinzel:wght@700&display=swap');
 
-    .container {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px dashed #00ffc3;
-      padding: 40px;
-      border-radius: 16px;
-      max-width: 700px;
-      margin: auto;
-      box-shadow: 0 0 30px #00ffc3;
-    }
+/* ====================== VARIÁVEIS ====================== */
+:root {
+  --bg-dark: #030016;
+  --accent: #7be0ff;
+  --gold: #d4af37;
+  --text: #fff;
+}
 
-    h1 {
-      font-size: 2.2em;
-      color: #00ffc3;
-    }
+/* ====================== BODY ====================== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at center, #060322, #020011);
+  overflow: hidden;
+  height: 100vh;
+  color: var(--text);
+}
 
-    code {
-      background-color: #1e1e1e;
-      color: #00ffc3;
-      padding: 4px 8px;
-      border-radius: 6px;
-    }
+/* ====================== ESTRELAS ====================== */
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite ease-in-out;
+}
+@keyframes twinkle {
+  0%,100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
 
-    p {
-      font-size: 1.1em;
-      margin: 16px 0;
-    }
+/* ====================== PLANETA GIF ====================== */
+.planet {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  width: 300px;
+  height: 300px;
+  z-index: 1;
+}
 
-    .button {
-      margin-top: 30px;
-      background-color: #00ffc3;
-      color: #000;
-      border: none;
-      padding: 15px 25px;
-      font-size: 1.1em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
+/* ====================== ENVELOPE ====================== */
+.envelope-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  height: 200px;
+  perspective: 800px;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
 
-    .button:hover {
-      transform: scale(1.05);
-      background-color: #00e6b0;
-    }
+.envelope {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top, #060322, #020011);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+  box-shadow: 0 0 30px rgba(212,175,55,0.6);
+}
 
-    .cat {
-      width: 200px;
-      margin: 30px auto;
-      display: block;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 10px #00ffc3);
-    }
+/* Aba 3D do envelope */
+.envelope::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: var(--gold);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transform: rotateX(0deg);
+  transition: transform 1s ease;
+  z-index: 3;
+}
+.envelope.open::before {
+  transform: rotateX(-180deg);
+}
 
-    .cat:hover {
-      transform: scale(1.1) rotate(5deg);
-    }
+/* ====================== SELO/BOTÃO ====================== */
+.btn-open {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Cinzel', serif;
+  background: radial-gradient(circle at 30% 30%, #d4af37, #8b6f21);
+  color: #000;
+  padding: 18px 45px;
+  border-radius: 50px;
+  border: 2px solid #f5e6a2;
+  cursor: pointer;
+  text-shadow: 0 0 8px #000;
+  box-shadow: 0 0 20px #d4af37, inset 0 0 10px #f8e7b3;
+  transition: all 0.4s ease;
+  z-index: 6;
+}
+.btn-open:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 0 30px #fff8dc, 0 0 60px #d4af37;
+}
 
-    footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #aaa;
-    }
-  </style>
+/* ====================== TÍTULO ====================== */
+.title {
+  position: fixed;
+  top: 80%;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  color: var(--gold);
+  text-shadow: 0 0 15px #fff8dc, 0 0 30px #d4af37;
+  z-index: 6;
+}
+
+/* ====================== FOGUETE GIF ====================== */
+.rocket {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  animation: rocketFly 12s linear infinite;
+  z-index: 2;
+  opacity: 0.9;
+}
+@keyframes rocketFly {
+  0% { transform: translateY(100vh) rotate(0deg); left: 5%; }
+  50% { transform: translateY(40vh) rotate(20deg); left: 80%; }
+  100% { transform: translateY(-20vh) rotate(45deg); left: 30%; }
+}
+
+/* ====================== ASTRONAUTA GIF ====================== */
+.astronaut {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  width: 200px;
+  height: 200px;
+  animation: float 6s ease-in-out infinite;
+  z-index: 3;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(3deg); }
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>function celebrarAniversario() 🎉</h1>
 
-    <p><strong>📍 Local:</strong> Chácara da minha família – Nova Veneza/GO</p>
-    <p><strong>📅 Data:</strong> 27 de Julho</p>
-    <p><strong>🍽️ Evento:</strong> Almoço + tarde de piscina com vibes insanas</p>
-    <p><strong>🧑‍💻 Quem?</strong> Você e sua família! Se tá lendo isso, é porque é VIP no meu código-fonte 💖</p>
-    <p><strong>⚠️ Confirmação:</strong> Me avisa em <code>real-time</code> clicando abaixo 👇</p>
+<!-- ESTRELAS -->
+<div class="stars" id="stars"></div>
 
-  <a class="button" href="https://wa.me/5562981048602?text=Oi%2C%20Aninha!%20Confirma%C3%A7%C3%A3o%20enviada%20com%20muito%20amor%20%F0%9F%92%96%20Eu%20e%20minha%20fam%C3%ADlia%20estaremos%20a%C3%AD%20no%20dia%2027%2F07%20pra%20comemorar%20com%20voc%C3%AA!%20%F0%9F%8E%89%E2%9C%A8" target="_blank">
-  Confirmar presença via WhatsApp
-</a>
+<!-- PLANETA GIF -->
+<img src="planeta.gif" class="planet" alt="Planeta">
 
-    <!-- GATINHO FOFO CENTRALIZADO -->
-    <img class="cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Gatinho programador fofo" />
+<!-- ENVELOPE -->
+<div class="envelope-container">
+  <div class="envelope" id="envelope"></div>
+  <button class="btn-open" id="openBtn">Abrir Convite</button>
+</div>
 
-    <footer>
-      <p>// Dress code: roupa leve + roupa de banho 💦</p>
-      <p>// Alimentação, diversão e caos organizado inclusos no pacote</p>
-      <p>// Ctrl+Alt+Del nas preocupações — só alegria 💃🕺</p>
-    </footer>
-  </div>
+<!-- TÍTULO -->
+<div class="title">Festa Espacial do Henrique 🚀</div>
+
+<!-- FOGUETE GIF -->
+<img src="foguete.gif" class="rocket" alt="Foguete">
+
+<!-- ASTRONAUTA GIF -->
+<img src="astronauta.gif" class="astronaut" alt="Astronauta">
+
+<!-- SOM DE CERA -->
+<audio id="waxSound" src="wax_sound.mp3"></audio>
+
+<script>
+// ====================== ESTRELAS ======================
+const starsContainer = document.getElementById('stars');
+for (let i = 0; i < 200; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  const size = Math.random() * 2 + 1;
+  star.style.width = size + 'px';
+  star.style.height = size + 'px';
+  star.style.top = Math.random() * 100 + 'vh';
+  star.style.left = Math.random() * 100 + 'vw';
+  starsContainer.appendChild(star);
+}
+
+// ====================== ABRIR ENVELOPE ======================
+const envelope = document.getElementById('envelope');
+const btn = document.getElementById('openBtn');
+const waxSound = document.getElementById('waxSound');
+
+btn.addEventListener('click', () => {
+  envelope.classList.add('open');
+  waxSound.play();
+  setTimeout(() => {
+    window.location.href = "segunda-pagina.html"; // Troque pelo link da sua segunda página
+  }, 1000);
+});
+</script>
+
 </body>
 </html>
