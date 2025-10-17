@@ -86,7 +86,7 @@
   }
 
   header h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-top: 10px;
     color: var(--accent);
   }
@@ -99,6 +99,20 @@
   @keyframes pulse {
     0%,100% { opacity: 0.6; }
     50% { opacity: 1; }
+  }
+
+  /* Contagem regressiva */
+  #countdown {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fffb00;
+    text-shadow: 0 0 10px #fffb00, 0 0 20px #fffb00;
+    animation: neon 1.5s infinite alternate;
+    margin-top: 10px;
+  }
+  @keyframes neon {
+    from { text-shadow: 0 0 10px #fffb00, 0 0 20px #fffb00; }
+    to { text-shadow: 0 0 20px #fffb00, 0 0 30px #fffb00; }
   }
 
   main {
@@ -182,6 +196,7 @@
     <img src="foto.jpg" alt="Henrique">
     <h1>Festa Espacial do Henrique 🚀</h1>
     <p class="message">Prepare-se para uma viagem entre planetas e estrelas! 🌌✨</p>
+    <p id="countdown"></p>
   </header>
 
   <main>
@@ -280,6 +295,33 @@
       const link = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
       window.open(link, "_blank");
     }
+
+    // Contagem regressiva
+    const countdownEl = document.getElementById('countdown');
+    const festaData = new Date("November 22, 2025 14:00:00").getTime();
+
+    function atualizarContagem() {
+      const now = new Date().getTime();
+      const distance = festaData - now;
+
+      if (distance < 0) {
+        countdownEl.textContent = "🎉 A festa começou! 🚀";
+        clearInterval(intervalo);
+        return;
+      }
+
+      const dias = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.textContent = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    const intervalo = setInterval(atualizarContagem, 1000);
+    atualizarContagem();
+
   </script>
 </body>
 </html>
+
